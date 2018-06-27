@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.rules.TestName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,15 +14,18 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import suporte.Generator;
+import suporte.ScreenShot;
 
 public class InformacoesUsuarioTest {
 
     private WebDriver navegador;
+    public TestName nomeDoTeste = new TestName();
 
     @Before
     public void setUp()
     {
-        System.setProperty("webdriver.chrome.driver","/home/s2it_dsouza/Drivers/chromedriver");
+        System.setProperty("webdriver.chrome.driver","/home/academia/Drivers/chromedriver");
         navegador = new ChromeDriver();
         //abrir o site
         navegador.get("http://www.juliodelima.com.br/taskit");
@@ -100,6 +104,8 @@ public class InformacoesUsuarioTest {
         WebElement mensagemSucess = navegador.findElement(By.id("toast-container"));
         String mensagem = mensagemSucess.getText();
         Assert.assertEquals("Rest in peace, dear phone!", mensagem);
+
+        ScreenShot.tirarScreenShot(navegador, "/home/academia/testReport" + Generator.dataHoraParaArquivo() + nomeDoTeste.getMethodName() + ".png");
 
         // aguardar ate 10 seg para que a janela desapareça
         WebDriverWait aguardar = new WebDriverWait(navegador,10);
