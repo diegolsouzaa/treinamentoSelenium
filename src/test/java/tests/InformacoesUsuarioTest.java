@@ -25,7 +25,7 @@ public class InformacoesUsuarioTest {
     @Before
     public void setUp()
     {
-        System.setProperty("webdriver.chrome.driver","/home/academia/Drivers/chromedriver");
+        System.setProperty("webdriver.chrome.driver","/home/s2it_dsouza/Drivers/chromedriver");
         navegador = new ChromeDriver();
         //abrir o site
         navegador.get("http://www.juliodelima.com.br/taskit");
