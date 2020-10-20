@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 import org.openqa.selenium.By;
@@ -20,12 +21,14 @@ import suporte.ScreenShot;
 public class InformacoesUsuarioTest {
 
     private WebDriver navegador;
+
+    @Rule
     public TestName nomeDoTeste = new TestName();
 
     @Before
     public void setUp()
     {
-        System.setProperty("webdriver.chrome.driver","/home/s2it_dsouza/Drivers/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/home/s2it_dsouza/tools/chromedriver_linux64/chromedriver");
         navegador = new ChromeDriver();
         //abrir o site
         navegador.get("http://www.juliodelima.com.br/taskit");
@@ -43,21 +46,20 @@ public class InformacoesUsuarioTest {
         // clicar no campo com name "password" que esta dentro no formulario com id "signinbox"
         formularioSinginBox.findElement(By.name("password")).sendKeys("123456");
 
-        // clicar no LINK com o texto SIGN IN
+        // clicar no LINK com o texto SIGN IN (<a href= ...>)
         navegador.findElement(By.linkText("SIGN IN")).click();
 
         // clicar em um link que possui a class 'me'
         navegador.findElement(By.className("me")).click();
 
-        // clicar em um link que possui o texto
+        // clicar em um link que possui o texto MORE DATA ABOUT YOU
         navegador.findElement(By.linkText("MORE DATA ABOUT YOU")).click();
 
     }
 
-   //  @Test
+    @Test
     public void testAdicionarUmaInformacaoAdicionalDoUsuario()
     {
-
         // clicar em um botao atraves do seu xpath
         navegador.findElement(By.xpath("//button[@data-target='addmoredata']")).click();
 
@@ -79,16 +81,11 @@ public class InformacoesUsuarioTest {
         String mensagem = mensagemSucess.getText();
         Assert.assertEquals("Your contact has been added!", mensagem);
 
-
-
-        // validar que dentro do elemente com class "me" está com o texto "Hi,Julio"
+        // validar que dentro do elemento com class "me" está com o texto "Hi,Julio"
         // WebElement me = navegador.findElement(By.className("me"));
         // String textoNoElementoMe = me.getText();
 
         // Assert.assertEquals("Hi, Julio", textoNoElementoMe);
-
-
-
     }
 
     @Test
@@ -105,7 +102,8 @@ public class InformacoesUsuarioTest {
         String mensagem = mensagemSucess.getText();
         Assert.assertEquals("Rest in peace, dear phone!", mensagem);
 
-        ScreenShot.tirarScreenShot(navegador, "/home/academia/testReport" + Generator.dataHoraParaArquivo() + nomeDoTeste.getMethodName() + ".png");
+        String screenShotArquivo = "/home/s2it_dsouza/TestReport/taskit_" + Generator.dataHoraParaArquivo() + "_" + nomeDoTeste.getMethodName() + ".png";
+        ScreenShot.tirarScreenShot(navegador,screenShotArquivo);
 
         // aguardar ate 10 seg para que a janela desapareça
         WebDriverWait aguardar = new WebDriverWait(navegador,10);
@@ -113,16 +111,13 @@ public class InformacoesUsuarioTest {
 
         // fazer logout, clicando no link com o texto logout
         navegador.findElement(By.linkText("Logout")).click();
-        
-
-
     }
 
     @After
     public void tearDown()
     {
         // fechar o navegador
-        // navegador.quit();
+        //navegador.quit();
     }
 
 }

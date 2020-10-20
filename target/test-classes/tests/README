@@ -1,4 +1,0 @@
-alterar o caminho do chromewebdriver
-
-pc-academia: System.setProperty("webdriver.chrome.driver","/home/academia/Drivers/chromedriver");
-pc-pagseguro: System.setProperty("webdriver.chrome.driver","/home/s2it_dsouza/Drivers/chromedriver");

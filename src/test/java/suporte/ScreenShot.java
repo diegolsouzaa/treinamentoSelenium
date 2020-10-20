@@ -12,16 +12,11 @@ public class ScreenShot {
     public static void tirarScreenShot(WebDriver navegador, String arquivo)
     {
         File screenshot = ((TakesScreenshot)navegador).getScreenshotAs(OutputType.FILE);
-
         try {
-
             FileUtils.copyFile(screenshot, new File(arquivo));
-
-        }catch (Exception ex)
-        {
+        }catch (Exception ex) {
             System.out.println("problemas pra copiar o arquivo" + ex.getMessage());
         }
-
     }
 
 }
