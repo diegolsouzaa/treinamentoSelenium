@@ -27,6 +27,12 @@
         <version>1.4</version>
         <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.easetech/easytest-core -->
+    <dependency>
+        <groupId>org.easetech</groupId>
+        <artifactId>easytest-core</artifactId>
+        <version>1.4.0</version>
+    </dependency>
 
 
 </dependencies>
